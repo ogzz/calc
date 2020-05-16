@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<main>
+
+    <head>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+
+    <body>
+        <div class="calculatorBody">
+            <div id="numbersRow"></div>
+            <div class="buttonRow">
+                <button id="clean" onclick="resetEverything()">CLEAR</button>
+                <button id="backspace">&#8678;</button>
+            </div>
+            <div class="buttonRow">
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">7</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">8</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">9</button>
+                <button id="operation"onclick="operatorDivide()">/</button>
+            </div>
+            <div class="buttonRow">
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">4</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">5</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">6</button>
+                <button id="operation" onclick="operatorMultiply()">X</button>
+            </div>
+            <div class="buttonRow">
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">1</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">2</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">3</button>
+                <button id="operation"onclick="operatorSub()">-</button>
+            </div>
+            <div class="buttonRow">
+                <button id="number" onclick="convertToNumber()">.</button>
+                <button id="number" onclick="putOnScreen(getNumber(this.textContent))">0</button>
+                <button id="finish">=</button>
+                <button id="operation" onclick="operatorAdd()">+</button>
+            </div>
+        </div>
+        <script>
+            let firstOperation = true;
+            let firstPress = false;
+            let firstHalf = 1;
+            let click = 1;
+
+            function getNumber(clicked_number) {
+                return clicked_number;
+
+            }
+
+            function putOnScreen(to_put) {
+                if (firstPress == true) {
+                    clearScreen();
+                    firstPress = false;
+                }
+                if (firstOperation == false) {
+                    document.getElementById("numbersRow").innerHTML += to_put;
+                } else
+                    document.getElementById("numbersRow").innerHTML += to_put;
+
+
+            }
+
+            function convertToNumber() {
+                let converetd = parseInt(
+                    document.getElementById("numbersRow").innerHTML
+                );
+                return converetd;
+            }
+
+            function clearScreen() {
+                document.getElementById("numbersRow").innerHTML = "";
+            }
+            function resetEverything(){
+                clearScreen();
+                firstOperation = true;
+                firstPress = false;
+                firstHalf = 1;
+                click = 1;
+            }
+            function operatorAdd() {
+                if (click == 2) {
+                    let finalSomt = firstHalf + convertToNumber();
+                    console.log(finalSomt);
+                    document.getElementById("numbersRow").innerHTML = finalSomt;
+                    click = 1;
+                    firstOperation = false;
+                    firstPress = true;
+                }
+                if (click == 1) {
+                    click = 2;
+                    firstHalf = convertToNumber();
+                    firstPress = true;
+
+                }
+            }
+                function operatorMultiply() {
+                    if (click == 2) {
+                        let finalSomt = firstHalf * convertToNumber();
+                        console.log(finalSomt);
+                        document.getElementById("numbersRow").innerHTML = finalSomt;
+                        click = 1;
+                        firstOperation = false;
+                        firstPress = true;
+                    }
+                    if (click == 1) {
+                        click = 2;
+                        firstHalf = convertToNumber();
+                        firstPress = true;
+
+                    }
+
+                }
+                function operatorSub() {
+                    if (click == 2) {
+                        let finalSomt = firstHalf - convertToNumber();
+                        console.log(finalSomt);
+                        document.getElementById("numbersRow").innerHTML = finalSomt;
+                        click = 1;
+                        firstOperation = false;
+                        firstPress = true;
+                    }
+                    if (click == 1) {
+                        click = 2;
+                        firstHalf = convertToNumber();
+                        firstPress = true;
+
+                    }
+
+                }
+                function operatorDivide() {
+                    if (click == 2) {
+                        let finalSomt = firstHalf / convertToNumber();
+                        console.log(finalSomt);
+                        if(convertToNumber() == 0){
+                            document.getElementById("numbersRow").innerHTML = "God damn it you broke the computer";
+                        }
+                        click = 1;
+                        firstOperation = false;
+                        firstPress = true;
+                    }
+                    if (click == 1) {
+                        click = 2;
+                        firstHalf = convertToNumber();
+                        firstPress = true;
+
+                    }
+
+                }
+        </script>
+    </body>
+</main>
